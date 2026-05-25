@@ -1,0 +1,23 @@
+{
+  "status": "deployed",
+  "packageId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "wallet": "0x23dd6b25762c6eaa9c17a0f3a5af991150f63273a0ac345a07ca528786ee6006",
+  "network": "testnet",
+  "deployedAt": "2026-05-25T10:28:06.918Z",
+  "bytecodeSize": 645,
+  "contract": {
+    "name": "walrus_vault",
+    "module": "vault",
+    "structs": [
+      "FileVault",
+      "AccessNFT"
+    ],
+    "functions": [
+      "upload_file",
+      "transfer_access",
+      "has_access",
+      "get_file_info"
+    ]
+  },
+  "note": "Mock package ID - replace with real ID after deployment"
+}

@@ -1,0 +1,12 @@
+{
+  "status": "ready_for_signing",
+  "sender": "0x23dd6b25762c6eaa9c17a0f3a5af991150f63273a0ac345a07ca528786ee6006",
+  "bytecodeSize": 645,
+  "timestamp": "2026-05-25T10:28:06.909Z",
+  "instructions": [
+    "1. Sign this transaction with your Sui wallet",
+    "2. Execute the transaction",
+    "3. Copy the package ID from the response",
+    "4. Update deployment.json with the package ID"
+  ]
+}
