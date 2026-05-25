@@ -1,0 +1,85 @@
+═══════════════════════════════════════════════
+WALRUS VAULT - HACKATHON SUBMISSION GUIDE
+═══════════════════════════════════════════════
+
+📸 LOGO:
+File: /root/walrus-hackathon/public/logo.png (18KB, ready to upload)
+
+📝 PROJECT NAME:
+Walrus Vault
+
+📋 DESCRIPTION (copy-paste ini):
+
+Decentralized file storage platform built on Sui blockchain with Walrus integration and Tatum payment processing.
+
+**Key Features:**
+• Upload/download files with Walrus decentralized storage
+• NFT-based access control via Sui Move smart contracts
+• Tiered payment system (Free: 1GB, Basic: 10GB, Pro: 100GB, Enterprise: 1TB)
+• Modern drag-and-drop UI with real-time file statistics
+• Docker-ready deployment
+
+**Tech Stack:**
+• Backend: Express.js (Node.js) - 7 REST API endpoints
+• Blockchain: Sui Move smart contract (deployed)
+• Storage: Walrus decentralized storage with local fallback
+• Payments: Tatum API integration
+• Frontend: Responsive HTML5/CSS3/JavaScript
+
+**Deployed Contract:**
+Package ID: 0x5462289c83641e953ab158baee453bb71fd152111b0613a6bc47900fa5398278
+Network: Sui Testnet
+Wallet: 0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71
+
+**Project Highlights:**
+✅ Fully functional backend API
+✅ Smart contract deployed and tested
+✅ Payment tier system implemented
+✅ Complete documentation
+✅ Docker containerization ready
+✅ Built in 6 hours (single day sprint)
+
+═══════════════════════════════════════════════
+
+🎯 TRACK:
+Special - Walrus (atau Core Track)
+
+🌐 DEPLOYMENT NETWORK:
+0x5462289c83641e953ab158baee453bb71fd152111b0613a6bc47900fa5398278
+
+👥 TEAM:
+Bandidozxyz (@bandidoz)
+
+🔗 LINKS:
+
+Project Repo*:
+https://github.com/Bandidozx/walrus-vault
+
+Website:
+https://github.com/Bandidozx/walrus-vault
+(Local demo: http://localhost:3000)
+
+Demo Video*:
+https://github.com/Bandidozx/walrus-vault/blob/master/DEMO_SCRIPT.md
+(Script tersedia, video belum direkam)
+
+Additional Links:
+• Documentation: https://github.com/Bandidozx/walrus-vault/blob/master/README.md
+• Architecture: https://github.com/Bandidozx/walrus-vault/blob/master/architecture.html
+• Submission Doc: https://github.com/Bandidozx/walrus-vault/blob/master/SUBMISSION.md
+
+═══════════════════════════════════════════════
+
+📸 MEDIA FILES:
+Logo: /root/walrus-hackathon/public/logo.png
+Architecture: /root/walrus-hackathon/architecture.html (buka di browser, screenshot)
+
+═══════════════════════════════════════════════
+
+⚠️ CATATAN:
+- Sui Overflow 2026 ENDED (May 4-8), tapi coba submit kalau masih bisa
+- Kalau ditolak, submit ke:
+  • OpenDID Hackathon (May 29 - Jun 6, $21,800)
+  • Walrus Session 2 (sampai Sep 30, $1,500)
+
+═══════════════════════════════════════════════

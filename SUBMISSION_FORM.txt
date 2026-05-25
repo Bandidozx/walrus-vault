@@ -1,0 +1,56 @@
+═══════════════════════════════════════════════
+SUI OVERFLOW 2026 - SUBMISSION FORM
+═══════════════════════════════════════════════
+
+📸 LOGO:
+- File: /root/walrus-hackathon/public/logo.png (buat dulu)
+- Atau pakai icon Walrus: https://walrus.xyz/logo.png
+
+📝 PROJECT NAME:
+Walrus Vault
+
+📋 DESCRIPTION:
+Decentralized file storage platform built on Sui blockchain with Walrus integration and Tatum payment processing.
+
+**Features:**
+• Upload/download files with Walrus decentralized storage
+• NFT-based access control via Sui Move smart contracts
+• Tiered payment system (Free, Basic, Pro, Enterprise)
+• Modern drag-and-drop UI
+• Docker-ready deployment
+
+**Tech Stack:**
+• Backend: Express.js (Node.js)
+• Blockchain: Sui Move
+• Storage: Walrus
+• Payments: Tatum API
+• Frontend: HTML5/CSS3/JavaScript
+
+**Deployed Contract:**
+Package ID: 0x5462289c83641e953ab158baee453bb71fd152111b0613a6bc47900fa5398278
+
+🎯 TRACK:
+Core Track (atau pilih: Special - Walrus)
+
+🌐 DEPLOYMENT NETWORK:
+0x5462289c83641e953ab158baee453bb71fd152111b0613a6bc47900fa5398278
+
+👥 TEAM:
+- Bandidozxyz (@bandidoz)
+
+🔗 LINKS:
+
+Project Repo*:
+https://github.com/Bandidozx/walrus-vault
+
+Website:
+http://localhost:3000 (atau deploy ke Vercel/Railway dulu)
+
+Demo Video*:
+(BELUM ADA - perlu bikin video 3-5 menit)
+
+📸 MEDIA:
+- Screenshot UI: /root/walrus-hackathon/public/index.html (screenshot dulu)
+- Architecture diagram: /root/walrus-hackathon/architecture.html
+
+═══════════════════════════════════════════════
