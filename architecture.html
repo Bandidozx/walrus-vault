@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walrus Vault - Architecture</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a2e;
+            font-family: 'Courier New', monospace;
+        }
+        svg {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background -->
+        <rect width="1200" height="800" fill="#1a1a2e"/>
+        
+        <!-- Title -->
+        <text x="600" y="40" font-size="32" fill="#fff" text-anchor="middle" font-weight="bold">
+            Walrus Vault Architecture
+        </text>
+        
+        <!-- User Layer -->
+        <g id="user">
+            <rect x="500" y="80" width="200" height="80" rx="10" fill="#667eea" stroke="#fff" stroke-width="2"/>
+            <text x="600" y="115" font-size="18" fill="#fff" text-anchor="middle" font-weight="bold">👤 User</text>
+            <text x="600" y="140" font-size="14" fill="#fff" text-anchor="middle">Web Browser</text>
+        </g>
+        
+        <!-- Arrow to Frontend -->
+        <line x1="600" y1="160" x2="600" y2="200" stroke="#fff" stroke-width="2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Frontend Layer -->
+        <g id="frontend">
+            <rect x="450" y="200" width="300" height="100" rx="10" fill="#764ba2" stroke="#fff" stroke-width="2"/>
+            <text x="600" y="235" font-size="18" fill="#fff" text-anchor="middle" font-weight="bold">🎨 Frontend</text>
+            <text x="600" y="260" font-size="14" fill="#fff" text-anchor="middle">HTML5 + CSS3 + JavaScript</text>
+            <text x="600" y="280" font-size="12" fill="#ddd" text-anchor="middle">Drag-drop Upload | File List | Stats</text>
+        </g>
+        
+        <!-- Arrow to Backend -->
+        <line x1="600" y1="300" x2="600" y2="340" stroke="#fff" stroke-width="2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Backend Layer -->
+        <g id="backend">
+            <rect x="450" y="340" width="300" height="100" rx="10" fill="#f093fb" stroke="#fff" stroke-width="2"/>
+            <text x="600" y="375" font-size="18" fill="#000" text-anchor="middle" font-weight="bold">⚙️ Backend API</text>
+            <text x="600" y="400" font-size="14" fill="#000" text-anchor="middle">Node.js + Express.js</text>
+            <text x="600" y="420" font-size="12" fill="#333" text-anchor="middle">Upload | Download | List | Delete</text>
+        </g>
+        
+        <!-- Three branches from Backend -->
+        
+        <!-- Left: Walrus -->
+        <line x1="500" y1="440" x2="250" y2="520" stroke="#fff" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <g id="walrus">
+            <rect x="100" y="520" width="300" height="100" rx="10" fill="#4facfe" stroke="#fff" stroke-width="2"/>
+            <text x="250" y="555" font-size="18" fill="#000" text-anchor="middle" font-weight="bold">🐋 Walrus Storage</text>
+            <text x="250" y="580" font-size="14" fill="#000" text-anchor="middle">Distributed File Storage</text>
+            <text x="250" y="600" font-size="12" fill="#333" text-anchor="middle">Blob ID | Aggregator | Publisher</text>
+        </g>
+        
+        <!-- Center: Sui -->
+        <line x1="600" y1="440" x2="600" y2="520" stroke="#fff" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <g id="sui">
+            <rect x="450" y="520" width="300" height="100" rx="10" fill="#00f2fe" stroke="#fff" stroke-width="2"/>
+            <text x="600" y="555" font-size="18" fill="#000" text-anchor="middle" font-weight="bold">⛓️ Sui Blockchain</text>
+            <text x="600" y="580" font-size="14" fill="#000" text-anchor="middle">Move Smart Contracts</text>
+            <text x="600" y="600" font-size="12" fill="#333" text-anchor="middle">FileVault | AccessNFT | Transfer</text>
+        </g>
+        
+        <!-- Right: Tatum -->
+        <line x1="700" y1="440" x2="950" y2="520" stroke="#fff" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <g id="tatum">
+            <rect x="800" y="520" width="300" height="100" rx="10" fill="#43e97b" stroke="#fff" stroke-width="2"/>
+            <text x="950" y="555" font-size="18" fill="#000" text-anchor="middle" font-weight="bold">💳 Tatum API</text>
+            <text x="950" y="580" font-size="14" fill="#000" text-anchor="middle">Payment Processing</text>
+            <text x="950" y="600" font-size="12" fill="#333" text-anchor="middle">Premium Storage | Subscriptions</text>
+        </g>
+        
+        <!-- Data Flow Labels -->
+        <text x="350" y="480" font-size="12" fill="#fff">Store Files</text>
+        <text x="600" y="480" font-size="12" fill="#fff" text-anchor="middle">Mint NFT</text>
+        <text x="850" y="480" font-size="12" fill="#fff">Process Payment</text>
+        
+        <!-- Wallet Box -->
+        <g id="wallet">
+            <rect x="100" y="680" width="400" height="80" rx="10" fill="#667eea" stroke="#fff" stroke-width="2"/>
+            <text x="300" y="710" font-size="16" fill="#fff" text-anchor="middle" font-weight="bold">🔐 Sui Wallet</text>
+            <text x="300" y="735" font-size="11" fill="#ddd" text-anchor="middle">0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71</text>
+        </g>
+        
+        <!-- Features Box -->
+        <g id="features">
+            <rect x="700" y="680" width="400" height="80" rx="10" fill="#764ba2" stroke="#fff" stroke-width="2"/>
+            <text x="900" y="705" font-size="16" fill="#fff" text-anchor="middle" font-weight="bold">✨ Key Features</text>
+            <text x="900" y="725" font-size="11" fill="#ddd" text-anchor="middle">Decentralized | Secure | NFT Access Control</text>
+            <text x="900" y="745" font-size="11" fill="#ddd" text-anchor="middle">Drag-drop Upload | Real-time Stats | File Sharing</text>
+        </g>
+        
+        <!-- Arrow marker definition -->
+        <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="#fff"/>
+            </marker>
+        </defs>
+        
+        <!-- Legend -->
+        <text x="50" y="30" font-size="12" fill="#aaa">Walrus x Sui x Tatum Hackathon 2026</text>
+        <text x="1150" y="30" font-size="12" fill="#aaa" text-anchor="end">May 25, 2026</text>
+    </svg>
+</body>
+</html>
