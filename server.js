@@ -273,6 +273,39 @@ app.delete('/api/file/:fileId', (req, res) => {
   res.json({ success: true, message: 'File deleted' });
 });
 
+// Pricing tiers
+app.get('/api/pricing', (req, res) => {
+  res.json({
+    tiers: [
+      {
+        name: 'Free',
+        storageGB: 1,
+        pricePerMonth: 0,
+        features: ['1GB storage', 'Basic support', 'NFT access control']
+      },
+      {
+        name: 'Basic',
+        storageGB: 10,
+        pricePerMonth: 2.99,
+        features: ['10GB storage', 'Email support', 'NFT access control', 'File sharing']
+      },
+      {
+        name: 'Pro',
+        storageGB: 100,
+        pricePerMonth: 9.99,
+        features: ['100GB storage', 'Priority support', 'NFT access control', 'File sharing', 'Encryption']
+      },
+      {
+        name: 'Enterprise',
+        storageGB: 1000,
+        pricePerMonth: 49.99,
+        features: ['1TB storage', '24/7 support', 'NFT access control', 'File sharing', 'Encryption', 'Custom domain']
+      }
+    ],
+    currency: 'USD'
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`\n🚀 Walrus Vault API running on http://localhost:${PORT}`);
