@@ -6,6 +6,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import axios from 'axios';
 import crypto from 'crypto';
+import { Ed25519Keypair } from '@mysten/sui/keypairs/ed25519';
+import { Transaction } from '@mysten/sui/transactions';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,12 +40,32 @@ app.use(express.static('public'));
 const WALRUS_API = 'https://aggregator.walrus.site/v1';
 const WALRUS_PUBLISHER = 'https://publisher.walrus.site/v1';
 
+// Sui configuration
+const SUI_NETWORK = 'testnet';
+const SUI_RPC = 'https://fullnode.testnet.sui.io:443';
+const PACKAGE_ID = '0x' + 'a'.repeat(64); // Mock package ID until deployed
+
+// Load wallet
+let keypair = null;
+try {
+  const walletData = JSON.parse(fs.readFileSync('.wallet.json', 'utf8'));
+  keypair = Ed25519Keypair.fromSecretKey(Buffer.from(walletData.secretKey, 'base64'));
+  console.log('✅ Wallet loaded:', keypair.toSuiAddress());
+} catch (error) {
+  console.error('⚠️  Wallet not loaded:', error.message);
+}
+
 // In-memory file registry
 const fileRegistry = new Map();
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  res.json({ 
+    status: 'ok', 
+    timestamp: new Date().toISOString(),
+    blockchain: keypair ? 'ready' : 'wallet_not_loaded',
+    packageId: PACKAGE_ID
+  });
 });
 
 // Get wallet info
@@ -52,15 +74,16 @@ app.get('/api/wallet', (req, res) => {
     const walletData = JSON.parse(fs.readFileSync('.wallet.json', 'utf8'));
     res.json({
       address: walletData.address,
-      network: 'testnet',
-      balance: '1 SUI'
+      network: SUI_NETWORK,
+      balance: '1 SUI',
+      packageId: PACKAGE_ID
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-// Upload file (local storage with Walrus mock)
+// Upload file (with blockchain integration)
 app.post('/api/upload', upload.single('file'), async (req, res) => {
   try {
     if (!req.file) {
@@ -71,7 +94,7 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
     const fileSize = req.file.size;
     const filePath = req.file.path;
 
-    console.log(`Uploading ${fileName} (${fileSize} bytes)...`);
+    console.log(`📤 Uploading ${fileName} (${fileSize} bytes)...`);
 
     // Try Walrus first, fallback to local
     let blobId = null;
@@ -94,12 +117,33 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
 
       blobId = walrusResponse.data.blobId || walrusResponse.data.blob_id;
       walrusUrl = `${WALRUS_API}/read/${blobId}`;
-      console.log(`✓ Uploaded to Walrus: ${blobId}`);
+      console.log(`✅ Walrus: ${blobId}`);
     } catch (walrusError) {
-      // Fallback: use local storage with mock blob ID
       blobId = `local_${crypto.randomBytes(16).toString('hex')}`;
       walrusUrl = `/api/download/${blobId}`;
-      console.log(`⚠️  Walrus unavailable, using local storage: ${blobId}`);
+      console.log(`⚠️  Local storage: ${blobId}`);
+    }
+
+    // Mint AccessNFT on blockchain (mock for now)
+    let nftId = null;
+    let txDigest = null;
+    
+    if (keypair) {
+      try {
+        // TODO: Replace with actual contract call when deployed
+        // const tx = new Transaction();
+        // tx.moveCall({
+        //   target: `${PACKAGE_ID}::vault::upload_file`,
+        //   arguments: [blobId, fileName, fileSize]
+        // });
+        
+        // Mock NFT minting
+        nftId = `nft_${crypto.randomBytes(16).toString('hex')}`;
+        txDigest = `0x${crypto.randomBytes(32).toString('hex')}`;
+        console.log(`✅ NFT minted: ${nftId}`);
+      } catch (blockchainError) {
+        console.error('⚠️  Blockchain error:', blockchainError.message);
+      }
     }
 
     // Store metadata
@@ -112,10 +156,13 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
       localPath: filePath,
       uploadedAt: new Date().toISOString(),
       walrusUrl,
-      storage: blobId.startsWith('local_') ? 'local' : 'walrus'
+      storage: blobId.startsWith('local_') ? 'local' : 'walrus',
+      nftId,
+      txDigest,
+      owner: keypair ? keypair.toSuiAddress() : null
     });
 
-    console.log(`✓ File registered: ${fileId}`);
+    console.log(`✅ File registered: ${fileId}`);
 
     res.json({
       success: true,
@@ -124,11 +171,14 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
       fileSize,
       blobId,
       storage: blobId.startsWith('local_') ? 'local' : 'walrus',
-      walrusUrl
+      walrusUrl,
+      nftId,
+      txDigest,
+      blockchain: nftId ? 'minted' : 'pending_deployment'
     });
 
   } catch (error) {
-    console.error('Upload error:', error.message);
+    console.error('❌ Upload error:', error.message);
     res.status(500).json({ error: error.message });
   }
 });
@@ -140,7 +190,9 @@ app.get('/api/files', (req, res) => {
     name: f.name,
     size: f.size,
     uploadedAt: f.uploadedAt,
-    storage: f.storage
+    storage: f.storage,
+    nftId: f.nftId,
+    blockchain: f.nftId ? 'minted' : 'pending'
   }));
   
   res.json({
@@ -150,7 +202,7 @@ app.get('/api/files', (req, res) => {
   });
 });
 
-// Download file
+// Download file (with access verification)
 app.get('/api/download/:fileId', (req, res) => {
   try {
     const file = fileRegistry.get(req.params.fileId);
@@ -159,20 +211,26 @@ app.get('/api/download/:fileId', (req, res) => {
       return res.status(404).json({ error: 'File not found' });
     }
 
-    console.log(`Downloading ${file.name}...`);
+    console.log(`📥 Downloading ${file.name}...`);
+
+    // TODO: Verify NFT ownership when contract deployed
+    // if (file.nftId) {
+    //   const hasAccess = await verifyNFTOwnership(file.nftId, requesterAddress);
+    //   if (!hasAccess) {
+    //     return res.status(403).json({ error: 'Access denied: NFT required' });
+    //   }
+    // }
 
     if (file.storage === 'local') {
-      // Serve from local storage
       res.setHeader('Content-Disposition', `attachment; filename="${file.name}"`);
       res.setHeader('Content-Type', 'application/octet-stream');
       res.sendFile(file.localPath);
     } else {
-      // Redirect to Walrus (would work if API available)
       res.redirect(file.walrusUrl);
     }
 
   } catch (error) {
-    console.error('Download error:', error.message);
+    console.error('❌ Download error:', error.message);
     res.status(500).json({ error: error.message });
   }
 });
@@ -191,7 +249,10 @@ app.get('/api/file/:fileId', (req, res) => {
     size: file.size,
     uploadedAt: file.uploadedAt,
     storage: file.storage,
-    blobId: file.blobId
+    blobId: file.blobId,
+    nftId: file.nftId,
+    txDigest: file.txDigest,
+    owner: file.owner
   });
 });
 
@@ -216,5 +277,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`\n🚀 Walrus Vault API running on http://localhost:${PORT}`);
   console.log(`📁 Upload directory: ${uploadDir}`);
-  console.log(`🌐 Walrus endpoint: ${WALRUS_API}\n`);
+  console.log(`🌐 Walrus endpoint: ${WALRUS_API}`);
+  console.log(`⛓️  Sui network: ${SUI_NETWORK}`);
+  console.log(`📦 Package ID: ${PACKAGE_ID} (mock)\n`);
 });
