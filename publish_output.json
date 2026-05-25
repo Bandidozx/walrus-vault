@@ -1,0 +1,228 @@
+[warn] Client/Server api version mismatch, client api version : 1.32.2, server api version : 1.72.2
+INCLUDING DEPENDENCY Sui
+INCLUDING DEPENDENCY MoveStdlib
+BUILDING walrus_vault
+warning[W02021]: duplicate alias
+  ┌─ /root/walrus-hackathon/sources/vault.move:2:23
+  │
+2 │     use sui::object::{Self, UID};
+  │                       ^^^^ Unnecessary alias 'object' for module 'sui::object'. This alias is provided by default
+  │
+  = This warning can be suppressed with '#[allow(duplicate_alias)]' applied to the 'module' or module member ('const', 'fun', or 'struct')
+
+warning[W02021]: duplicate alias
+  ┌─ /root/walrus-hackathon/sources/vault.move:2:29
+  │
+2 │     use sui::object::{Self, UID};
+  │                             ^^^ Unnecessary alias 'UID' for module member 'sui::object::UID'. This alias is provided by default
+  │
+  = This warning can be suppressed with '#[allow(duplicate_alias)]' applied to the 'module' or module member ('const', 'fun', or 'struct')
+
+warning[W02021]: duplicate alias
+  ┌─ /root/walrus-hackathon/sources/vault.move:3:14
+  │
+3 │     use sui::transfer;
+  │              ^^^^^^^^ Unnecessary alias 'transfer' for module 'sui::transfer'. This alias is provided by default
+  │
+  = This warning can be suppressed with '#[allow(duplicate_alias)]' applied to the 'module' or module member ('const', 'fun', or 'struct')
+
+warning[W02021]: duplicate alias
+  ┌─ /root/walrus-hackathon/sources/vault.move:4:27
+  │
+4 │     use sui::tx_context::{Self, TxContext};
+  │                           ^^^^ Unnecessary alias 'tx_context' for module 'sui::tx_context'. This alias is provided by default
+  │
+  = This warning can be suppressed with '#[allow(duplicate_alias)]' applied to the 'module' or module member ('const', 'fun', or 'struct')
+
+warning[W02021]: duplicate alias
+  ┌─ /root/walrus-hackathon/sources/vault.move:4:33
+  │
+4 │     use sui::tx_context::{Self, TxContext};
+  │                                 ^^^^^^^^^ Unnecessary alias 'TxContext' for module member 'sui::tx_context::TxContext'. This alias is provided by default
+  │
+  = This warning can be suppressed with '#[allow(duplicate_alias)]' applied to the 'module' or module member ('const', 'fun', or 'struct')
+
+warning[Lint W99002]: potentially unenforceable custom transfer/share/freeze policy
+   ┌─ /root/walrus-hackathon/sources/vault.move:56:16
+   │
+56 │     public fun transfer_access(
+   │                ^^^^^^^^^^^^^^^ Potential unintended implementation of a custom transfer function.
+57 │         nft: AccessNFT,
+   │         --- An instance of a module-private type with a store ability to be transferred coming from here
+   ·
+60 │         transfer::transfer(nft, recipient);
+   │                   -------- Instances of a type with a store ability can be transferred using the public_transfer function which often negates the intent of enforcing a custom transfer policy
+   │
+   = A custom transfer policy for a given type is implemented through calling the private transfer function variant in the module defining this type
+   = This warning can be suppressed with '#[allow(lint(custom_state_change))]' applied to the 'module' or module member ('const', 'fun', or 'struct')
+
+Please report feedback on the linter warnings at https://forums.sui.io
+
+Skipping dependency verification
+{
+  "digest": "9izT5P8oPaBRnKcphnfULvstJxW37cucQc9nhsNL8oJ1",
+  "transaction": {
+    "data": {
+      "messageVersion": "v1",
+      "transaction": {
+        "kind": "ProgrammableTransaction",
+        "inputs": [
+          {
+            "type": "pure",
+            "valueType": "address",
+            "value": "0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71"
+          }
+        ],
+        "transactions": [
+          {
+            "Publish": [
+              "0x0000000000000000000000000000000000000000000000000000000000000001",
+              "0x0000000000000000000000000000000000000000000000000000000000000002"
+            ]
+          },
+          {
+            "TransferObjects": [
+              [
+                {
+                  "Result": 0
+                }
+              ],
+              {
+                "Input": 0
+              }
+            ]
+          }
+        ]
+      },
+      "sender": "0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71",
+      "gasData": {
+        "payment": [
+          {
+            "objectId": "0x30e703071869a057f154af14bf63f130894e3942c805db3d8367924b54bb0d7f",
+            "version": 349181674,
+            "digest": "EGjh3oGXRJHGYtEyPHPFpenryJExCoQxPT4gk5p8tgve"
+          }
+        ],
+        "owner": "0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71",
+        "price": "1000",
+        "budget": "100000000"
+      }
+    },
+    "txSignatures": [
+      "ACJBiCuU01RDL0g7FnAOvdkJWBvp5ina9cqFAxLV9lHVKvx6hdyp8/gXn3f1uRSl5GD7ScD+kd46mknOWTrQgQV4pv7b169rrggOoGSX4MYZNmuFAtMy786dfM29b4qeEw=="
+    ]
+  },
+  "effects": {
+    "messageVersion": "v1",
+    "status": {
+      "status": "success"
+    },
+    "executedEpoch": "1110",
+    "gasUsed": {
+      "computationCost": "1000000",
+      "storageCost": "9994000",
+      "storageRebate": "978120",
+      "nonRefundableStorageFee": "9880"
+    },
+    "modifiedAtVersions": [
+      {
+        "objectId": "0x30e703071869a057f154af14bf63f130894e3942c805db3d8367924b54bb0d7f",
+        "sequenceNumber": "349181674"
+      }
+    ],
+    "transactionDigest": "9izT5P8oPaBRnKcphnfULvstJxW37cucQc9nhsNL8oJ1",
+    "created": [
+      {
+        "owner": "Immutable",
+        "reference": {
+          "objectId": "0x5e761b8433f6e5495229f9632d0ed279ea8b64e8b7bd8f81f3835b453ae40fd8",
+          "version": 1,
+          "digest": "8pTXvak7Qw7h1fwTRZur3YVaRKuNqM7y4oPv4VEaQehW"
+        }
+      },
+      {
+        "owner": {
+          "AddressOwner": "0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71"
+        },
+        "reference": {
+          "objectId": "0xe747f379c02a93f36ed8a9b285b13dd87c74a4c4aab4b9e7c9668251acda8510",
+          "version": 349181675,
+          "digest": "5Xy6dtiNic2iWHuowfqJKvaT2f8G9N8gG3GoK3dnAym8"
+        }
+      }
+    ],
+    "mutated": [
+      {
+        "owner": {
+          "AddressOwner": "0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71"
+        },
+        "reference": {
+          "objectId": "0x30e703071869a057f154af14bf63f130894e3942c805db3d8367924b54bb0d7f",
+          "version": 349181675,
+          "digest": "HuRjRpJ72pidGU438m61cWTuqSgfGbmcLqpqExcXhDij"
+        }
+      }
+    ],
+    "gasObject": {
+      "owner": {
+        "AddressOwner": "0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71"
+      },
+      "reference": {
+        "objectId": "0x30e703071869a057f154af14bf63f130894e3942c805db3d8367924b54bb0d7f",
+        "version": 349181675,
+        "digest": "HuRjRpJ72pidGU438m61cWTuqSgfGbmcLqpqExcXhDij"
+      }
+    },
+    "dependencies": [
+      "BEVGeVYcUJfuAzBof6yW816Rq6hZD1kUCEoPkAr49pyf",
+      "FH8GVfRoMQ7BboERCGgU76ZmX8WSHjrF9Rom7EvXsSMQ"
+    ]
+  },
+  "events": [],
+  "objectChanges": [
+    {
+      "type": "mutated",
+      "sender": "0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71",
+      "owner": {
+        "AddressOwner": "0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71"
+      },
+      "objectType": "0x2::coin::Coin<0x2::sui::SUI>",
+      "objectId": "0x30e703071869a057f154af14bf63f130894e3942c805db3d8367924b54bb0d7f",
+      "version": "349181675",
+      "previousVersion": "349181674",
+      "digest": "HuRjRpJ72pidGU438m61cWTuqSgfGbmcLqpqExcXhDij"
+    },
+    {
+      "type": "published",
+      "packageId": "0x5e761b8433f6e5495229f9632d0ed279ea8b64e8b7bd8f81f3835b453ae40fd8",
+      "version": "1",
+      "digest": "8pTXvak7Qw7h1fwTRZur3YVaRKuNqM7y4oPv4VEaQehW",
+      "modules": [
+        "vault"
+      ]
+    },
+    {
+      "type": "created",
+      "sender": "0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71",
+      "owner": {
+        "AddressOwner": "0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71"
+      },
+      "objectType": "0x2::package::UpgradeCap",
+      "objectId": "0xe747f379c02a93f36ed8a9b285b13dd87c74a4c4aab4b9e7c9668251acda8510",
+      "version": "349181675",
+      "digest": "5Xy6dtiNic2iWHuowfqJKvaT2f8G9N8gG3GoK3dnAym8"
+    }
+  ],
+  "balanceChanges": [
+    {
+      "owner": {
+        "AddressOwner": "0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71"
+      },
+      "coinType": "0x2::sui::SUI",
+      "amount": "-10015880"
+    }
+  ],
+  "timestampMs": "1779709193822",
+  "confirmedLocalExecution": true,
+  "checkpoint": "340932600"
+}

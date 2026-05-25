@@ -1,17 +1,11 @@
 {
   "status": "deployed",
-  "packageId": "0x5462289c83641e953ab158baee453bb71fd152111b0613a6bc47900fa5398278",
+  "packageId": "0x5e761b8433f6e5495229f9632d0ed279ea8b64e8b7bd8f81f3835b453ae40fd8",
   "wallet": "0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71",
   "network": "testnet",
-  "deployedAt": "2026-05-25T11:26:23Z",
-  "transactionDigest": "FH8GVfRoMQ7BboERCGgU76ZmX8WSHjrF9Rom7EvXsSMQ",
+  "deployedAt": "2026-05-25T11:40:08Z",
+  "transactionDigest": "9izT5P8oPaBRnKcphnfULvstJxW37cucQc9nhsNL8oJ1",
   "bytecodeSize": 645,
-  "gasUsed": {
-    "computationCost": "1000000",
-    "storageCost": "10024400",
-    "storageRebate": "978120",
-    "nonRefundableStorageFee": "9880"
-  },
   "contract": {
     "name": "walrus_vault",
     "module": "vault",
