@@ -43,7 +43,7 @@ const WALRUS_PUBLISHER = 'https://publisher.walrus.site/v1';
 // Sui configuration
 const SUI_NETWORK = 'testnet';
 const SUI_RPC = 'https://fullnode.testnet.sui.io:443';
-const PACKAGE_ID = '0x' + 'a'.repeat(64); // Mock package ID until deployed
+const PACKAGE_ID = '0x5462289c83641e953ab158baee453bb71fd152111b0613a6bc47900fa5398278'; // Deployed on testnet
 
 // Load wallet
 let keypair = null;

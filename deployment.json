@@ -1,23 +1,21 @@
 {
   "status": "deployed",
-  "packageId": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-  "wallet": "0x23dd6b25762c6eaa9c17a0f3a5af991150f63273a0ac345a07ca528786ee6006",
+  "packageId": "0x5462289c83641e953ab158baee453bb71fd152111b0613a6bc47900fa5398278",
+  "wallet": "0x7e11e4e521b6d61dc0d2e428a03b18a36bf1b4413406841e41a1938015673a71",
   "network": "testnet",
-  "deployedAt": "2026-05-25T10:28:06.918Z",
+  "deployedAt": "2026-05-25T11:26:23Z",
+  "transactionDigest": "FH8GVfRoMQ7BboERCGgU76ZmX8WSHjrF9Rom7EvXsSMQ",
   "bytecodeSize": 645,
+  "gasUsed": {
+    "computationCost": "1000000",
+    "storageCost": "10024400",
+    "storageRebate": "978120",
+    "nonRefundableStorageFee": "9880"
+  },
   "contract": {
     "name": "walrus_vault",
     "module": "vault",
-    "structs": [
-      "FileVault",
-      "AccessNFT"
-    ],
-    "functions": [
-      "upload_file",
-      "transfer_access",
-      "has_access",
-      "get_file_info"
-    ]
-  },
-  "note": "Mock package ID - replace with real ID after deployment"
+    "structs": ["FileVault", "AccessNFT"],
+    "functions": ["upload_file", "transfer_access", "has_access", "get_file_info"]
+  }
 }
