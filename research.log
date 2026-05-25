@@ -1,0 +1,29 @@
+=== WALRUS + TATUM RESEARCH ===
+
+[1] Walrus Protocol Research...
+✗ Walrus docs not accessible, checking alternatives...
+  ✓ Found 208 Walrus repos on GitHub
+    - MystenLabs/walrus: A decentralized blob store using Sui for coordination and go
+    - SoundnessLabs/soundness-layer: Soundness Layer is a decentralized verification layer built 
+    - MystenLabs/walrus-sites: Walrus Sites: Decentralized Websites using Sui and Walrus.
+
+[2] Tatum API Research...
+✓ Tatum.io accessible
+  - Blockchain API platform
+  - NFT support
+✓ Tatum docs accessible
+
+[3] DeepSurge Hackathon Details...
+✓ DeepSurge page fetched
+  - GitHub repo required
+
+[4] Project Recommendation...
+Based on research, best project idea:
+  **Decentralized Data Vault**
+  - Store files on Walrus (decentralized storage)
+  - Access control via Sui smart contracts
+  - API integration via Tatum
+  - MVP: Upload file → Store on Walrus → Mint access NFT on Sui
+  - Complexity: Medium (achievable in 12 days)
+
+=== RESEARCH COMPLETE ===

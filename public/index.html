@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walrus Vault - Decentralized File Storage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .upload-area {
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: #764ba2;
+            background: #f8f9ff;
+        }
+
+        .upload-area.dragover {
+            border-color: #764ba2;
+            background: #f0f2ff;
+        }
+
+        .upload-area p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: transform 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .wallet-info {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .wallet-info p {
+            color: #666;
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .wallet-info .address {
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+            word-break: break-all;
+        }
+
+        .files-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            transition: background 0.2s ease;
+        }
+
+        .file-item:hover {
+            background: #f8f9ff;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .file-size {
+            font-size: 0.85em;
+            color: #999;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.85em;
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        .status.loading {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+            display: block;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔐 Walrus Vault</h1>
+            <p>Decentralized File Storage on Sui Blockchain</p>
+        </header>
+
+        <div class="main-grid">
+            <!-- Upload Section -->
+            <div class="card">
+                <h2>Upload File</h2>
+                
+                <div class="wallet-info">
+                    <p><strong>Wallet:</strong></p>
+                    <p class="address" id="walletAddress">Loading...</p>
+                    <p><strong>Balance:</strong> <span id="walletBalance">--</span> SUI</p>
+                </div>
+
+                <div class="upload-area" id="uploadArea">
+                    <p>📁 Drag and drop your file here</p>
+                    <p style="font-size: 0.9em; color: #999;">or click to select</p>
+                </div>
+                <input type="file" id="fileInput">
+
+                <div id="uploadStatus" class="status"></div>
+
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="totalFiles">0</div>
+                        <div class="stat-label">Files Stored</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="totalSize">0 B</div>
+                        <div class="stat-label">Total Size</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Files Section -->
+            <div class="card">
+                <h2>Your Files</h2>
+                <div class="files-list" id="filesList">
+                    <p style="color: #999; text-align: center; padding: 20px;">No files yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api';
+
+        // Upload area drag and drop
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                uploadFile();
+            }
+        });
+
+        fileInput.addEventListener('change', uploadFile);
+
+        async function uploadFile() {
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const statusDiv = document.getElementById('uploadStatus');
+            statusDiv.className = 'status loading';
+            statusDiv.textContent = `Uploading ${file.name}...`;
+
+            try {
+                const response = await fetch(`${API_BASE}/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    statusDiv.className = 'status success';
+                    statusDiv.textContent = `✓ File uploaded! NFT ID: ${data.nftId}`;
+                    fileInput.value = '';
+                    loadFiles();
+                } else {
+                    throw new Error(data.error);
+                }
+            } catch (error) {
+                statusDiv.className = 'status error';
+                statusDiv.textContent = `✗ Upload failed: ${error.message}`;
+            }
+        }
+
+        async function loadFiles() {
+            try {
+                const response = await fetch(`${API_BASE}/files`);
+                const data = await response.json();
+
+                const filesList = document.getElementById('filesList');
+                const totalFiles = document.getElementById('totalFiles');
+                const totalSize = document.getElementById('totalSize');
+
+                if (data.files.length === 0) {
+                    filesList.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">No files yet</p>';
+                    totalFiles.textContent = '0';
+                    totalSize.textContent = '0 B';
+                    return;
+                }
+
+                let totalBytes = 0;
+                filesList.innerHTML = data.files.map(file => {
+                    totalBytes += file.fileSize;
+                    return `
+                        <div class="file-item">
+                            <div class="file-info">
+                                <div class="file-name">${file.fileName}</div>
+                                <div class="file-size">${formatBytes(file.fileSize)} • ${new Date(file.uploadedAt).toLocaleDateString()}</div>
+                            </div>
+                            <div class="file-actions">
+                                <button class="btn-small" onclick="downloadFile('${file.id}', '${file.fileName}')">Download</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                totalFiles.textContent = data.files.length;
+                totalSize.textContent = formatBytes(totalBytes);
+            } catch (error) {
+                console.error('Error loading files:', error);
+            }
+        }
+
+        async function downloadFile(fileId, fileName) {
+            window.location.href = `${API_BASE}/download/${fileId}`;
+        }
+
+        async function loadWalletInfo() {
+            try {
+                const response = await fetch(`${API_BASE}/wallet`);
+                const data = await response.json();
+
+                document.getElementById('walletAddress').textContent = data.address;
+                document.getElementById('walletBalance').textContent = (parseInt(data.balance) / 1e9).toFixed(2);
+            } catch (error) {
+                console.error('Error loading wallet:', error);
+            }
+        }
+
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        // Initialize
+        loadWalletInfo();
+        loadFiles();
+        setInterval(loadFiles, 5000); // Refresh every 5 seconds
+    </script>
+</body>
+</html>
