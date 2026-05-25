@@ -12,31 +12,14 @@ module walrus_vault::vault {
         file_name: String,
         file_size: u64,
         created_at: u64,
-        access_nft_id: ID,
     }
 
     /// NFT that grants access to a file
     public struct AccessNFT has key, store {
         id: UID,
         owner: address,
-        vault_id: ID,
         file_name: String,
         created_at: u64,
-    }
-
-    /// Event emitted when file is uploaded
-    public struct FileUploaded has copy, drop {
-        vault_id: ID,
-        owner: address,
-        file_name: String,
-        walrus_blob_id: String,
-    }
-
-    /// Event emitted when file is accessed
-    public struct FileAccessed has copy, drop {
-        vault_id: ID,
-        accessor: address,
-        accessed_at: u64,
     }
 
     /// Upload a file to Walrus and create vault entry
@@ -48,26 +31,21 @@ module walrus_vault::vault {
     ): (FileVault, AccessNFT) {
         let sender = tx_context::sender(ctx);
         let vault_uid = object::new(ctx);
-        let vault_id = object::uid_to_inner(&vault_uid);
-        
         let nft_uid = object::new(ctx);
-        let nft_id = object::uid_to_inner(&nft_uid);
 
         let vault = FileVault {
             id: vault_uid,
             owner: sender,
-            walrus_blob_id: walrus_blob_id,
+            walrus_blob_id,
             file_name: file_name,
-            file_size: file_size,
+            file_size,
             created_at: tx_context::epoch(ctx),
-            access_nft_id: nft_id,
         };
 
         let nft = AccessNFT {
             id: nft_uid,
             owner: sender,
-            vault_id: vault_id,
-            file_name: file_name,
+            file_name,
             created_at: tx_context::epoch(ctx),
         };
 

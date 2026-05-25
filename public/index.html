@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -29,182 +29,90 @@
             margin-bottom: 40px;
         }
 
-        header h1 {
+        h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        header p {
+        .subtitle {
             font-size: 1.1em;
             opacity: 0.9;
-        }
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
         }
 
         .card {
             background: white;
             border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .card h2 {
-            color: #333;
             margin-bottom: 20px;
-            font-size: 1.5em;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
-        .upload-area {
+        .wallet-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .wallet-address {
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+            word-break: break-all;
+        }
+
+        .upload-zone {
             border: 2px dashed #667eea;
             border-radius: 8px;
             padding: 40px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-        }
-
-        .upload-area:hover {
-            border-color: #764ba2;
             background: #f8f9ff;
         }
 
-        .upload-area.dragover {
+        .upload-zone:hover {
             border-color: #764ba2;
             background: #f0f2ff;
         }
 
-        .upload-area p {
-            color: #666;
+        .upload-zone.dragover {
+            border-color: #764ba2;
+            background: #e8ebff;
+        }
+
+        .upload-icon {
+            font-size: 3em;
             margin-bottom: 10px;
+        }
+
+        .upload-text {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .upload-hint {
+            color: #999;
+            font-size: 0.9em;
         }
 
         input[type="file"] {
             display: none;
         }
 
-        button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: transform 0.2s ease;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        .wallet-info {
-            background: #f8f9ff;
-            padding: 15px;
-            border-radius: 8px;
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
             margin-bottom: 20px;
         }
 
-        .wallet-info p {
-            color: #666;
-            margin: 5px 0;
-            font-size: 0.9em;
-        }
-
-        .wallet-info .address {
-            font-family: 'Courier New', monospace;
-            color: #667eea;
-            word-break: break-all;
-        }
-
-        .files-list {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .file-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            transition: background 0.2s ease;
-        }
-
-        .file-item:hover {
-            background: #f8f9ff;
-        }
-
-        .file-info {
-            flex: 1;
-        }
-
-        .file-name {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 4px;
-        }
-
-        .file-size {
-            font-size: 0.85em;
-            color: #999;
-        }
-
-        .file-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-small {
-            padding: 6px 12px;
-            font-size: 0.85em;
-        }
-
-        .status {
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            display: none;
-        }
-
-        .status.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            display: block;
-        }
-
-        .status.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            display: block;
-        }
-
-        .status.loading {
-            background: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-            display: block;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .stat-box {
-            background: #f8f9ff;
+        .stat {
+            background: #f8f9fa;
             padding: 15px;
             border-radius: 8px;
             text-align: center;
@@ -217,19 +125,167 @@
         }
 
         .stat-label {
-            font-size: 0.85em;
-            color: #999;
+            color: #666;
+            font-size: 0.9em;
             margin-top: 5px;
         }
 
-        @media (max-width: 768px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
+        .files-list {
+            margin-top: 20px;
+        }
 
-            header h1 {
-                font-size: 1.8em;
-            }
+        .files-header {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .file-item:hover {
+            background: #e8ebff;
+            transform: translateX(5px);
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .file-meta {
+            font-size: 0.85em;
+            color: #999;
+        }
+
+        .file-size {
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-right: 10px;
+        }
+
+        .file-storage {
+            background: #764ba2;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-right: 10px;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-danger {
+            background: #ff6b6b;
+            color: white;
+            padding: 6px 12px;
+            font-size: 0.85em;
+        }
+
+        .btn-danger:hover {
+            background: #ff5252;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .empty-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error-message {
+            display: none;
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+            font-size: 0.9em;
         }
     </style>
 </head>
@@ -237,168 +293,187 @@
     <div class="container">
         <header>
             <h1>🔐 Walrus Vault</h1>
-            <p>Decentralized File Storage on Sui Blockchain</p>
+            <p class="subtitle">Decentralized File Storage on Sui Blockchain</p>
         </header>
 
-        <div class="main-grid">
-            <!-- Upload Section -->
-            <div class="card">
-                <h2>Upload File</h2>
-                
-                <div class="wallet-info">
-                    <p><strong>Wallet:</strong></p>
-                    <p class="address" id="walletAddress">Loading...</p>
-                    <p><strong>Balance:</strong> <span id="walletBalance">--</span> SUI</p>
+        <div class="card">
+            <div class="wallet-info">
+                <div>
+                    <strong>Wallet:</strong>
+                    <span class="wallet-address" id="walletAddress">Loading...</span>
                 </div>
-
-                <div class="upload-area" id="uploadArea">
-                    <p>📁 Drag and drop your file here</p>
-                    <p style="font-size: 0.9em; color: #999;">or click to select</p>
-                </div>
-                <input type="file" id="fileInput">
-
-                <div id="uploadStatus" class="status"></div>
-
-                <div class="stats">
-                    <div class="stat-box">
-                        <div class="stat-value" id="totalFiles">0</div>
-                        <div class="stat-label">Files Stored</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="totalSize">0 B</div>
-                        <div class="stat-label">Total Size</div>
-                    </div>
+                <div>
+                    <strong>Network:</strong> Sui Testnet
                 </div>
             </div>
 
-            <!-- Files Section -->
-            <div class="card">
-                <h2>Your Files</h2>
-                <div class="files-list" id="filesList">
-                    <p style="color: #999; text-align: center; padding: 20px;">No files yet</p>
+            <div class="success-message" id="successMessage"></div>
+            <div class="error-message" id="errorMessage"></div>
+
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">📤</div>
+                <div class="upload-text">Drag files here or click to upload</div>
+                <div class="upload-hint">Store files securely on Walrus + Sui</div>
+                <input type="file" id="fileInput" multiple>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <div>Uploading to Walrus...</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="fileCount">0</div>
+                    <div class="stat-label">Files</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="totalSize">0 B</div>
+                    <div class="stat-label">Total Size</div>
                 </div>
             </div>
+
+            <div class="files-list">
+                <div class="files-header">📁 Your Files</div>
+                <div id="filesList">
+                    <div class="empty-state">
+                        <div class="empty-icon">📭</div>
+                        <div>No files uploaded yet</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Walrus x Sui x Tatum Hackathon 2026</p>
+            <p>Prize Pool: $2,000 USD | Deadline: June 6, 2026</p>
         </div>
     </div>
 
     <script>
-        const API_BASE = 'http://localhost:3000/api';
-
-        // Upload area drag and drop
-        const uploadArea = document.getElementById('uploadArea');
+        const uploadZone = document.getElementById('uploadZone');
         const fileInput = document.getElementById('fileInput');
+        const loading = document.getElementById('loading');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
 
-        uploadArea.addEventListener('click', () => fileInput.click());
-
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.classList.add('dragover');
-        });
-
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('dragover');
-        });
-
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                fileInput.files = files;
-                uploadFile();
+        // Load wallet info
+        async function loadWallet() {
+            try {
+                const res = await fetch('/api/wallet');
+                const data = await res.json();
+                document.getElementById('walletAddress').textContent = data.address;
+            } catch (error) {
+                console.error('Failed to load wallet:', error);
             }
-        });
+        }
 
-        fileInput.addEventListener('change', uploadFile);
+        // Load files
+        async function loadFiles() {
+            try {
+                const res = await fetch('/api/files');
+                const data = await res.json();
+                
+                document.getElementById('fileCount').textContent = data.count;
+                document.getElementById('totalSize').textContent = formatBytes(data.totalSize);
 
-        async function uploadFile() {
-            const file = fileInput.files[0];
-            if (!file) return;
+                const filesList = document.getElementById('filesList');
+                
+                if (data.files.length === 0) {
+                    filesList.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-icon">📭</div>
+                            <div>No files uploaded yet</div>
+                        </div>
+                    `;
+                    return;
+                }
 
+                filesList.innerHTML = data.files.map(file => `
+                    <div class="file-item">
+                        <div class="file-info">
+                            <div class="file-name">📄 ${escapeHtml(file.name)}</div>
+                            <div class="file-meta">
+                                Uploaded: ${new Date(file.uploadedAt).toLocaleString()}
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="file-size">${formatBytes(file.size)}</span>
+                            <span class="file-storage">${file.storage.toUpperCase()}</span>
+                            <div class="file-actions">
+                                <button class="btn-primary" onclick="downloadFile('${file.id}', '${escapeHtml(file.name)}')">
+                                    ⬇️ Download
+                                </button>
+                                <button class="btn-danger" onclick="deleteFile('${file.id}')">
+                                    🗑️ Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Failed to load files:', error);
+            }
+        }
+
+        // Upload file
+        async function uploadFile(file) {
             const formData = new FormData();
             formData.append('file', file);
 
-            const statusDiv = document.getElementById('uploadStatus');
-            statusDiv.className = 'status loading';
-            statusDiv.textContent = `Uploading ${file.name}...`;
-
             try {
-                const response = await fetch(`${API_BASE}/upload`, {
+                loading.style.display = 'block';
+                const res = await fetch('/api/upload', {
                     method: 'POST',
                     body: formData
                 });
 
-                const data = await response.json();
+                const data = await res.json();
 
-                if (data.success) {
-                    statusDiv.className = 'status success';
-                    statusDiv.textContent = `✓ File uploaded! NFT ID: ${data.nftId}`;
-                    fileInput.value = '';
-                    loadFiles();
-                } else {
-                    throw new Error(data.error);
-                }
+                if (!res.ok) throw new Error(data.error);
+
+                showSuccess(`✓ ${file.name} uploaded successfully (${data.storage})`);
+                loadFiles();
             } catch (error) {
-                statusDiv.className = 'status error';
-                statusDiv.textContent = `✗ Upload failed: ${error.message}`;
+                showError(`✗ Failed to upload: ${error.message}`);
+            } finally {
+                loading.style.display = 'none';
             }
         }
 
-        async function loadFiles() {
-            try {
-                const response = await fetch(`${API_BASE}/files`);
-                const data = await response.json();
-
-                const filesList = document.getElementById('filesList');
-                const totalFiles = document.getElementById('totalFiles');
-                const totalSize = document.getElementById('totalSize');
-
-                if (data.files.length === 0) {
-                    filesList.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">No files yet</p>';
-                    totalFiles.textContent = '0';
-                    totalSize.textContent = '0 B';
-                    return;
-                }
-
-                let totalBytes = 0;
-                filesList.innerHTML = data.files.map(file => {
-                    totalBytes += file.fileSize;
-                    return `
-                        <div class="file-item">
-                            <div class="file-info">
-                                <div class="file-name">${file.fileName}</div>
-                                <div class="file-size">${formatBytes(file.fileSize)} • ${new Date(file.uploadedAt).toLocaleDateString()}</div>
-                            </div>
-                            <div class="file-actions">
-                                <button class="btn-small" onclick="downloadFile('${file.id}', '${file.fileName}')">Download</button>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-
-                totalFiles.textContent = data.files.length;
-                totalSize.textContent = formatBytes(totalBytes);
-            } catch (error) {
-                console.error('Error loading files:', error);
-            }
-        }
-
+        // Download file
         async function downloadFile(fileId, fileName) {
-            window.location.href = `${API_BASE}/download/${fileId}`;
-        }
-
-        async function loadWalletInfo() {
             try {
-                const response = await fetch(`${API_BASE}/wallet`);
-                const data = await response.json();
-
-                document.getElementById('walletAddress').textContent = data.address;
-                document.getElementById('walletBalance').textContent = (parseInt(data.balance) / 1e9).toFixed(2);
+                const res = await fetch(`/api/download/${fileId}`);
+                const blob = await res.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;
+                a.click();
+                window.URL.revokeObjectURL(url);
             } catch (error) {
-                console.error('Error loading wallet:', error);
+                showError(`Failed to download: ${error.message}`);
             }
         }
 
+        // Delete file
+        async function deleteFile(fileId) {
+            if (!confirm('Delete this file?')) return;
+
+            try {
+                const res = await fetch(`/api/file/${fileId}`, { method: 'DELETE' });
+                if (!res.ok) throw new Error('Delete failed');
+                showSuccess('✓ File deleted');
+                loadFiles();
+            } catch (error) {
+                showError(`Failed to delete: ${error.message}`);
+            }
+        }
+
+        // Utilities
         function formatBytes(bytes) {
             if (bytes === 0) return '0 B';
             const k = 1024;
@@ -407,10 +482,55 @@
             return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
         }
 
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function showSuccess(msg) {
+            successMessage.textContent = msg;
+            successMessage.style.display = 'block';
+            setTimeout(() => successMessage.style.display = 'none', 5000);
+        }
+
+        function showError(msg) {
+            errorMessage.textContent = msg;
+            errorMessage.style.display = 'block';
+            setTimeout(() => errorMessage.style.display = 'none', 5000);
+        }
+
+        // Drag and drop
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            for (let file of files) {
+                uploadFile(file);
+            }
+        });
+
+        uploadZone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            for (let file of e.target.files) {
+                uploadFile(file);
+            }
+            fileInput.value = '';
+        });
+
         // Initialize
-        loadWalletInfo();
+        loadWallet();
         loadFiles();
-        setInterval(loadFiles, 5000); // Refresh every 5 seconds
+        setInterval(loadFiles, 5000);
     </script>
 </body>
 </html>
